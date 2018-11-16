@@ -9,6 +9,9 @@ module.exports = {
     host: process.env.DB_HOST,
     dialect: 'postgres',
     ssl: true,
+    define: {
+      schema: 'public'
+    },
     dialectOptions: {
       ssl: true
     }
