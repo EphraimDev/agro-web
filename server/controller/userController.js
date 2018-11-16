@@ -49,7 +49,7 @@ class UserController {
 
       const token = Authorization.generateToken(newUser);
       
-      const url = `http://localhost:3000/verify-user`;
+      const url = `https://ephaig-web.herokuapp.com/verify-user`;
       Mailer.verifyAccount(url, firstname, lastname, email, userToken);
 
       return res.status(201).json({

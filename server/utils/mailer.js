@@ -1,6 +1,8 @@
 import nodemailer from 'nodemailer';
 import randomString from 'random-string';
 
+require('dotenv').config();
+
 let verify = randomString({
   length: 12,
   numeric: true,
@@ -27,17 +29,17 @@ class Mailer {
   static sendMail({ email, subject, content }) {
     // create reusable transporter object
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
+      service: process.env.service,
       auth: {
-        user: 'ephylogistics@gmail.com',
-        pass: 'ephaig14@'
+        user: process.env.user,
+        pass: process.env.pass
       }
     });
 
     // setup email data
     const mailOptions = {
       from: email,
-      to: 'ephylogistics@gmail.com',
+      to: process.env.user,
       subject,
       text: content,
     };
@@ -128,16 +130,16 @@ class Mailer {
 
     // create reusable transporter object
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
+      service: process.env.service,
       auth: {
-        user: 'ephylogistics@gmail.com',
-        pass: 'ephaig14@'
+        user: process.env.user,
+        pass: process.env.pass
       }
     });
 
     // setup email data
     const mailOptions = {
-      from: '"WizzyAgro Farms" <ephylogistics@gmail.com>',
+      from: `"WizzyAgro Farms" ${process.env.user}`,
       to,
       subject,
       html: message,
