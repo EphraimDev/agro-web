@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const config = {
+module.exports = {
 	production:{
     url: process.env.DATABASE_URL,
     username: process.env.DB_USER,
@@ -30,5 +30,3 @@ const config = {
     logging: false
   },
 }
-
-export default config;

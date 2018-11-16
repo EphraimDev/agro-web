@@ -1,0 +1,6 @@
+.env
+node_modules/
+fabric8-analytics.log
+/.sequelizerc
+/fabric8-analytics.log
+.vscode/
