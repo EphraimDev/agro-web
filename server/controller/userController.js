@@ -35,7 +35,7 @@ class UserController {
     });
 
 
-    return db.public.Users.findOrCreate({
+    return db.Users.findOrCreate({
       where: {email},
       defaults: {
         firstname,
@@ -49,7 +49,7 @@ class UserController {
 
       const token = Authorization.generateToken(newUser);
       
-      const url = `https://ephaig-web.herokuapp.com/verify-user`;
+      const url = `https://wizzyagrofarms.herokuapp.com/verify-user`;
       Mailer.verifyAccount(url, firstname, lastname, email, userToken);
 
       return res.status(201).json({
@@ -72,7 +72,7 @@ class UserController {
    * @returns {(function|object)} Function next() or JSON object
    */
   static login(req, res) {
-    return db.users.findOne({ 
+    return db.Users.findOne({ 
       where: { email: req.body.email } })
       .then((authUser) => {
         if (!authUser) return res.status(401).json({ message: 'Invalid Credentials' });
@@ -115,7 +115,7 @@ class UserController {
     const {email, token} = req.body;
     console.log(typeof token);
     
-    return db.users.findOne({ 
+    return db.Users.findOne({ 
       where: { email } })
       .then((authUser) => {
         if (!authUser) return res.status(401).json({ message: 'User does not exist' });
@@ -146,7 +146,7 @@ class UserController {
   static userProfile(req, res) {
     const {userId} = req.params;
 
-    db.profiles.findOrCreate({ where: { userId }})
+    db.Profiles.findOrCreate({ where: { userId }})
       .then(profile => {
         if(!profile) {
           return res.status(400).json({message: "User does not exist"})
@@ -175,7 +175,7 @@ class UserController {
 
     const {userId} = req.params;
 
-    return db.profiles.findOne({
+    return db.Profiles.findOne({
       where: {userId}
     })
     .then((user) => {
