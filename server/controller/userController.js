@@ -34,6 +34,7 @@ class UserController {
       special: false
     });
 
+    console.log(db);
 
     return db.Users.findOrCreate({
       where: {email},
