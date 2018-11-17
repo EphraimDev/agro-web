@@ -35,7 +35,7 @@ class UserController {
     });
 
 
-    return db.users.findOrCreate({
+    return db.Use.findOrCreate({
       where: {email},
       defaults: {
         firstname,
