@@ -35,7 +35,7 @@ class UserController {
     });
 
 
-    return db.Users.findOrCreate({
+    return db.users.findOrCreate({
       where: {email},
       defaults: {
         firstname,
@@ -72,7 +72,7 @@ class UserController {
    * @returns {(function|object)} Function next() or JSON object
    */
   static login(req, res) {
-    return db.Users.findOne({ 
+    return db.users.findOne({ 
       where: { email: req.body.email } })
       .then((authUser) => {
         if (!authUser) return res.status(401).json({ message: 'Invalid Credentials' });
@@ -115,7 +115,7 @@ class UserController {
     const {email, token} = req.body;
     console.log(typeof token);
     
-    return db.Users.findOne({ 
+    return db.users.findOne({ 
       where: { email } })
       .then((authUser) => {
         if (!authUser) return res.status(401).json({ message: 'User does not exist' });
@@ -146,7 +146,7 @@ class UserController {
   static userProfile(req, res) {
     const {userId} = req.params;
 
-    db.Profiles.findOrCreate({ where: { userId }})
+    db.profiles.findOrCreate({ where: { userId }})
       .then(profile => {
         if(!profile) {
           return res.status(400).json({message: "User does not exist"})
@@ -175,7 +175,7 @@ class UserController {
 
     const {userId} = req.params;
 
-    return db.Profiles.findOne({
+    return db.profiles.findOne({
       where: {userId}
     })
     .then((user) => {
