@@ -41,7 +41,7 @@ router.post('/api/v1/contact-us', message.createNewMessage);
 router.post('/api/v1/verify-user', user.verifyAccount);
 router.put('/api/v1/user/:userId/edit-profile', Auth.authorize, user.editProfile);
 router.post('/api/v1/article', Auth.authorize, upload.single('image'), article.newArticle);
-router.put('/api/v1/update-article/:articleId', Auth.authorize, article.updateArticle);
+router.put('/api/v1/update-article/:articleId', Auth.authorize, upload.single('image'), article.updateArticle);
 router.get('/api/v1/articles', article.allArticles);
 router.get('/api/v1/article/:title', article.readArticle);
 router.post('/api/v1/:userId/order-produce', Auth.authorize, produce.newOrder);

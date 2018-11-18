@@ -24,15 +24,13 @@ class ArticleController {
       title, article
     } = req.body;
 
-    console.log(req.file)
-
     cloudinary.config({
       cloud_name: process.env.cloud_name,
       api_key: process.env.api_key,
       api_secret: process.env.api_secret
     })
+
     cloudinary.uploader.upload(`../server/uploads/${req.file.filename}`, (result) => {
-      console.log(result.secure_url)
       return db.Articles.findOrCreate({
         where: {title},
         defaults: {
@@ -42,7 +40,6 @@ class ArticleController {
         }
       }).spread((newArticle, created) => {
         if (!created) return res.status(409).send({message: 'Title already in use'})
-        console.log('here')
         return res.status(201).json({
           message: 'Successful',
           success: true,
@@ -120,7 +117,14 @@ class ArticleController {
       title, image, article
     } = req.body;
 
-    db.Articles.findOne({ where: { articleId }})
+    cloudinary.config({
+      cloud_name: process.env.cloud_name,
+      api_key: process.env.api_key,
+      api_secret: process.env.api_secret
+    })
+
+    cloudinary.uploader.upload(`../server/uploads/${req.file.filename}`, (result) => {
+      db.Articles.findOne({ where: { articleId }})
       .then(foundArticle => {
         if(!foundArticle) {
           return res.status(400).json({message: "Article does not exist"})
@@ -136,6 +140,7 @@ class ArticleController {
         .catch(err => next(err))
       })
       .catch(console.error());
+    });
   }
 }
 
