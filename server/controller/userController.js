@@ -34,8 +34,6 @@ class UserController {
       special: false
     });
 
-    console.log(db);
-
     return db.Users.findOrCreate({
       where: {email},
       defaults: {
@@ -48,10 +46,7 @@ class UserController {
     }).spread((newUser, created) => {
       if (!created) return res.status(409).send({message: 'Email already in use'})
 
-      const token = Authorization.generateToken(newUser);
-      
-      const url = `https://wizzyagrofarms.herokuapp.com/verify-user`;
-      Mailer.verifyAccount(url, firstname, lastname, email, userToken);
+      const token = Authorization.generateToken(newUser)
 
       return res.status(201).json({
         message: 'Successful',
@@ -78,8 +73,8 @@ class UserController {
       .then((authUser) => {
         if (!authUser) return res.status(401).json({ message: 'Invalid Credentials' });
         
-        if(!authUser.confirmed) return res.status(401).json({message: 'Please confirm your email to login'});
-        console.log(authUser.confirmed)
+        //if(!authUser.confirmed) return res.status(401).json({message: 'Please confirm your email to login'});
+        //console.log(authUser.confirmed)
         UserController.verifyPassword(req.body.password, authUser.password)
           .then((result) => {
             if (!result) {
@@ -88,8 +83,6 @@ class UserController {
               });
             } 
             const token = Authorization.generateToken(authUser);
-
-            
             
             return res.header('x-access-token', token).status(200).json({
               message: 'Login successful',
