@@ -13,13 +13,12 @@ let storage = multer.diskStorage({
          cb(null, './uploads/');
      },
      filename: function(req, file, cb){
-        let uuid = UUID.v4();
-       cb(null, uuid + file.originalname);
+       cb(null, new Date().toISOString().replace(/:/g, '-'), file.originalname);
      }
    })
 
 const fileFilter = (req, file, cb) => {
-    if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+    if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpg') {
         cb(null, true);
     } else {
         cb(null, false)
