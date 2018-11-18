@@ -8,7 +8,7 @@ module.exports = {
       firstname: 'Admin',
       lastname: 'Admin',
       email: 'admin@wizzyagro.com',
-      password: bcrypt.hashSync('admin', 10),
+      password: bcrypt.hashSync('Admin2018@', 10),
       confirmed: true,
       token: '111111',
       createdAt: new Date(),
