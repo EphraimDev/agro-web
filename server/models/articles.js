@@ -16,7 +16,7 @@ export default (sequelize)  => {
       allowNull: true
     },
     article: {
-      type: Sequelize.STRING,
+      type: Sequelize.TEXT,
       allowNull: false
     }
   }, {});
