@@ -36,7 +36,7 @@ class ArticleController {
       return res.status(201).json({
         message: 'Successful',
         success: true,
-        newArticle: newArticle[0]
+        newArticle
       });
     })
   }
