@@ -1,5 +1,4 @@
 import db from '../models';
-import cloudinary from 'cloudinary';
 import config from '../config';
 //import moment from '../utils/moment';
 
@@ -21,14 +20,14 @@ class ArticleController {
    */
   static newArticle(req, res, next) {
     const {
-      title, article
+      title, article, image
     } = req.body;
 
     return db.Articles.findOrCreate({
       where: {title},
       defaults: {
         title , 
-        image: result.secure_url, 
+        image, 
         article
       }
     }).spread((newArticle, created) => {
