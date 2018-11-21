@@ -23,6 +23,8 @@ class ArticleController {
       title, article, image
     } = req.body;
 
+    console.log(title, article, image)
+
     return db.Articles.findOrCreate({
       where: {title},
       defaults: {
