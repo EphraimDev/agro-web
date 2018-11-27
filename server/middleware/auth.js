@@ -24,7 +24,7 @@ class Authorization {
       },
       process.env.SECRET,
       {
-        expiresIn: '1d',
+        expiresIn: '365d',
       },
     );
 
