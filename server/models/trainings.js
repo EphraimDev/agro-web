@@ -12,15 +12,16 @@ export default (sequelize)  => {
       allowNull: false
     },
     location: {
-      type: Sequelize.STRING,
-      allowNull: false
+      type: Sequelize.ENUM('Virtual', "At Client's Place", "At Wizzy Agro Farm"),
+      allowNull: false,
+      defaultValue: 'Virtual'
     },
     duration: {
       type: Sequelize.STRING,
       allowNull: false
     },
     status: {
-      type: Sequelize.STRING,
+      type: Sequelize.ENUM('Canceled', 'Pending', 'Started', 'Ended'),
       allowNull: false
     },
     comment: {

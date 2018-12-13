@@ -26,7 +26,7 @@ module.exports = {
         allowNull: false
       },
       status: {
-        type: Sequelize.STRING,
+        type: Sequelize.ENUM('Pending', 'Canceled', 'Delivered', 'In Transit'),
         allowNull: false
       },
       comment: {

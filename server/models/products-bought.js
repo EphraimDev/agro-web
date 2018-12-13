@@ -15,12 +15,12 @@ export default (sequelize)  => {
       type: Sequelize.STRING,
       allowNull: false
     },
-    quatity: {
+    quantity: {
       type: Sequelize.STRING,
       allowNull: false
     },
     status: {
-      type: Sequelize.STRING,
+      type: Sequelize.ENUM('Pending', 'Canceled', 'Delivered', 'In Transit'),
       allowNull: false,
       defaultValue: 'Pending'
     },

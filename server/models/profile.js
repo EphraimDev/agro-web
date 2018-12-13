@@ -12,17 +12,17 @@ export default (sequelize) => {
       type: Sequelize.STRING,
       allowNull: true
     },
-    packages_bought: {
-      type: Sequelize.INTEGER,
-      allowNull: false,
-      defaultValue: 0
-    },
-    courses_taken: {
+    products_services: {
       type: Sequelize.INTEGER,
       allowNull: false,
       defaultValue: 0
     },
     investment: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      defaultValue: 0
+    },
+    training_consultancy: {
       type: Sequelize.INTEGER,
       allowNull: false,
       defaultValue: 0
