@@ -18,13 +18,14 @@ module.exports = {
         allowNull: false
       },
       location: {
-        type: Sequelize.ENUM('Virtual', "At Client's Place", "At Wizzy Agro Farm"),
+        type: Sequelize.ENUM('Virtual', "At Clients Place", "At Wizzy Agro Farm"),
         allowNull: false,
         defaultValue: 'Virtual'
       },
       status: {
         type: Sequelize.ENUM('Canceled', 'Pending', 'Started', 'Ended'),
-        allowNull: false
+        allowNull: false,
+        defaultValue: 'Pending'
       },
       duration: {
         type: Sequelize.STRING,
