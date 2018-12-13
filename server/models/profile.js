@@ -21,7 +21,7 @@ export default (sequelize) => {
       type: Sequelize.INTEGER,
       allowNull: false,
       defaultValue: 0
-    },
+    }, 
     training_consultancy: {
       type: Sequelize.INTEGER,
       allowNull: false,
