@@ -47,13 +47,11 @@ class UserController {
       if (!created) return res.status(409).send({message: 'Email already in use'})
 
       const token = Authorization.generateToken(newUser)
-
+      db.Profiles.findOrCreate({ where: { userId: newUser.userId }})
       return res.status(201).json({
         message: 'Successful',
         success: true,
         userId:newUser.userId,
-        firstname: newUser.firstname,
-        lastname: newUser.lastname,
         token,
       });
     })
@@ -137,21 +135,43 @@ class UserController {
    * @param {object} res
    * @returns {(function|object)} Function next() or JSON object
    */
-  static userProfile(req, res) {
+  static async userProfile(req, res) {
     const {userId} = req.params;
+    console.log(userId)
+    try {
+      let profile = await db.Profiles.findOne({ where: { userId }});
 
-    db.Profiles.findOrCreate({ where: { userId }})
-      .then(profile => {
-        if(!profile) {
-          return res.status(400).json({message: "User does not exist"})
-        }
+      let username = await db.Users.findOne({ where: { userId }});
 
+      
+
+      if(username && profile) {
         return res.status(201).json({ 
-          profile: profile[0],
+          profile,
+          username,
           message: "Successful"
         })
-      })
-      .catch(console.error());
+      } else {
+        return res.status(400).json({message: "User does not exist"})
+      }
+    } catch(err) {
+      console.log(err)
+    }
+
+    // let profile = await db.Profiles.findOne({ where: { userId }});
+
+    // let username = await db.Users.findOne({ where: { userId }});
+
+    // if(username && profile) {
+    //   return res.status(201).json({ 
+    //     profile,
+    //     username,
+    //     message: "Successful"
+    //   })
+    // } else {
+    //   return res.status(400).json({message: "User does not exist"})
+    // }
+      
   }
 
   /**

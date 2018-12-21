@@ -21,7 +21,8 @@ router.get('/api/v1/article/:title', article.readArticle);
 router.post('/api/v1/:userId/order-produce', Auth.authorize, produce.newOrder);
 router.get('/api/v1/:userId/products-ordered', Auth.authorize, produce.getAllOrders);
 router.put('/api/v1/orders/:orderId', Auth.authorize, produce.updateOrder);
-router.get('/api/v1/:orderId', Auth.authorize, produce.getOrder);
+router.get('/api/v1/order/:orderId', Auth.authorize, produce.getOrder);
 router.delete('/api/v1/order/:orderId', Auth.authorize, produce.deleteOrder);
+router.get('/api/v1/:userId/last-product-ordered', Auth.authorize, produce.getLastOrder)
 
 export default router;

@@ -16,6 +16,18 @@ export default (sequelize)  => {
       allowNull: false
     },
     quantity: {
+      type: Sequelize.INTEGER,
+      allowNull: false
+    },
+    amount: {
+      type: Sequelize.INTEGER,
+      allowNull: false
+    },
+    price: {
+      type: Sequelize.INTEGER,
+      allowNull: false
+    },
+    unit: {
       type: Sequelize.STRING,
       allowNull: false
     },

@@ -18,16 +18,15 @@ class ProductsController {
    */
   static newOrder(req, res, next) {
     const {
-      product, address, quatity, comment
+      product, address, quantity, amount, comment, price, unit
     } = req.body;
-    console.log(quatity)
 
     const {userId} = req.params;
 
     return db.ProductsBought.findOrCreate({
       where: {id: 0},
       defaults: {
-        product, address, quatity, comment, userId
+        product, address, quantity, amount, comment, userId, price, unit
       }
     }).spread((newOrder, created) => {
       if (!created) return res.status(409).send({message: 'Order was not successful, try again'})
@@ -63,6 +62,44 @@ class ProductsController {
         })
       })
       .catch(console.error());
+  }
+
+  /**
+   * Gets last order
+   * @method getLastOrder
+   * @memberof ProductsController
+   * @param {object} req
+   * @param {object} res
+   * @returns {(function|object)} Function next() or JSON object
+   */
+  static async getLastOrder(req, res) {
+    const {userId} = req.params;
+
+    try {
+      let allOrders = await db.ProductsBoughts.findAll({ where: { userId }});
+
+    const dates = await allOrders.map(order => new Date(order.createdAt).getTime());
+
+    dates.sort();
+
+    let num = dates.length;
+
+    const strDate = JSON.stringify(new Date(dates[num-1]));
+
+    let date = strDate.slice(1, 11);
+    let time = strDate.slice(12, 20);
+    let gmt = strDate.slice(21,24)
+    let fullDate = `${date} ${time}.${gmt}+00`;
+
+    const latestOrder = await db.ProductsBoughts.findOne({ where: { userId, createdAt: fullDate }});
+
+     return res.status(201).json({ 
+          latestOrder,
+          message: "Successful"
+        })
+    } catch(err) {
+      throw new Error(err)
+    }
   }
 
   /**

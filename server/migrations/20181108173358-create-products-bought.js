@@ -20,8 +20,20 @@ module.exports = {
       address: {
         type: Sequelize.STRING,
         allowNull: false
+      }, 
+      quantity: {
+        type: Sequelize.INTEGER,
+        allowNull: false
       },
-      quatity: {
+      amount: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
+      price: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
+      unit: {
         type: Sequelize.STRING,
         allowNull: false
       },
