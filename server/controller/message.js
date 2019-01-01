@@ -29,6 +29,24 @@ class MessageController {
      * @param {object} res - Response object
      * @return {json} res.json
      */
+    static subscribe(req, res) {
+      const {
+        email
+      } = req.body;
+  
+      Mailer.newsletter(email);
+      return res.status(200).json({
+          message: 'successful'
+      })
+    }
+
+  /**
+     * Creates a new unit
+     * @staticmethod
+     * @param  {object} req - Request object
+     * @param {object} res - Response object
+     * @return {json} res.json
+     */
     static receiveOrderMessage(req, res) {
       const {
         name, email, phone, reference, address, product, quantity

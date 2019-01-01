@@ -67,8 +67,26 @@ class Mailer {
         <div>
           <h4>Name: ${name}</h4>
           <h4>Email: ${email}</h4>
-          <h4>Subject: ${subject}</h4>
           <h4>Message: ${message}<h4>
+        </div>
+      `
+    });
+  }
+
+  /**
+   * Sends Mail after user succesfully creates an account
+   * @method createMessage
+   * @memberof Mailer
+   * @param {string} email
+   * @returns {nothing} returns nothing
+   */
+  static newsletter(email) {
+    return Mailer.sendMail({
+      email,
+      subject: "Add me to your subscribers' list",
+      content: `
+        <div>
+          Kindly add my email, ${email}, to your list for future newsletters
         </div>
       `
     });

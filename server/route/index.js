@@ -27,5 +27,6 @@ router.delete('/api/v1/order/:orderId', Auth.authorize, produce.deleteOrder);
 router.get('/api/v1/:userId/last-product-ordered', Auth.authorize, produce.getLastOrder);
 router.get('/api/v1/product/:productId', produce.getAProduct);
 router.post('/api/v1/order-message', MessageController.receiveOrderMessage);
+router.post('/api/v1/newsletter', MessageController.subscribe);
 
 export default router;
