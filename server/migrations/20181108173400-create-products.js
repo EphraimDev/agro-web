@@ -5,12 +5,12 @@ module.exports = {
       id: {
         allowNull: false,
         autoIncrement: true,
-        primaryKey: true,
         type: Sequelize.INTEGER
-      },
+      }, 
       productId: {
         type: Sequelize.UUID,
         allowNull: false,
+        primaryKey: true,
         defaultValue: Sequelize.UUIDV4
       },
       product: {
