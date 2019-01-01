@@ -5,6 +5,7 @@ import article from '../controller/article';
 import produce from '../controller/products';
 import Auth from '../middleware/auth';
 import Validator from '../middleware/validator';
+import MessageController from '../controller/message';
 
 const router = express.Router();
 
@@ -23,6 +24,8 @@ router.get('/api/v1/:userId/products-ordered', Auth.authorize, produce.getAllOrd
 router.put('/api/v1/orders/:orderId', Auth.authorize, produce.updateOrder);
 router.get('/api/v1/order/:orderId', Auth.authorize, produce.getOrder);
 router.delete('/api/v1/order/:orderId', Auth.authorize, produce.deleteOrder);
-router.get('/api/v1/:userId/last-product-ordered', Auth.authorize, produce.getLastOrder)
+router.get('/api/v1/:userId/last-product-ordered', Auth.authorize, produce.getLastOrder);
+router.get('/api/v1/product/:productId', produce.getAProduct);
+router.post('/api/v1/order-message', MessageController.receiveOrderMessage);
 
 export default router;

@@ -41,7 +41,7 @@ class Mailer {
       from: email,
       to: process.env.user,
       subject,
-      text: content,
+      html: content,
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
@@ -59,14 +59,43 @@ class Mailer {
    * @param {string} email
    * @returns {nothing} returns nothing
    */
-  static createMessage(name, phoneNumber, email, message) {
+  static createMessage(name, subject, email, message) {
     return Mailer.sendMail({
       email,
-      subject: 'New message',
-      content: `Hello WizzyAgro Farm,
+      subject,
+      content: `
+        <div>
+          <h4>Name: ${name}</h4>
+          <h4>Email: ${email}</h4>
+          <h4>Subject: ${subject}</h4>
+          <h4>Message: ${message}<h4>
+        </div>
+      `
+    });
+  }
 
-                My name is ${name}, email is ${email} and my phone number is ${phoneNumber}. 
-      ${message}`
+  /**
+   * Sends Mail after user succesfully creates an account
+   * @method createMessage
+   * @memberof Mailer
+   * @param {string} email
+   * @returns {nothing} returns nothing
+   */
+  static createMessageOrder(name, reference, phone, email, address, product, quantity) {
+    return Mailer.sendMail({
+      email,
+      subject: 'New Order',
+      content: `
+        <div>
+          <h4>Ref: ${reference}</h4>
+          <h4>Name: ${name}</h4>
+          <h4>Phone Number: ${phone}<h4>
+          <h4>Email: ${email}</h4>
+          <h4>Address: ${address}</h4>
+          <h4>Product: ${product}</h4>
+          <h4>Quantity: ${quantity}<h4>
+        </div>
+      `
     });
   }
 

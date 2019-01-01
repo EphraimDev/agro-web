@@ -39,6 +39,32 @@ class ProductsController {
     })
   }
 
+   /**
+   * Gets a product
+   * @method getAProduct
+   * @memberof ProductsController
+   * @param {object} req
+   * @param {object} res
+   * @returns {(function|object)} Function next() or JSON object
+   */
+  static getAProduct(req, res) {
+    const {productId} = req.params;
+    console.log(productId);
+
+    db.Products.findOne({ where: { productId }})
+      .then(product => {
+        if(!product) {
+          return res.status(400).json({message: "Product does not exist"})
+        }
+
+        return res.status(201).json({ 
+          product,
+          message: "Successful"
+        })
+      })
+      .catch(console.error());
+  }
+
   /**
    * Gets an order
    * @method getOrder
